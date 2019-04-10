@@ -1,5 +1,6 @@
 package com.mcb.creditfactory.external;
 
+import com.mcb.creditfactory.dto.ValueDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,21 @@ public class ExternalApproveService {
             case AIRPLANE: code = approvePlane(object); break;
             default: code = -100;
         }
-
         return code;
+    }
+
+    public int approveValue(ValueDto dto){
+        switch(dto.getObjectType()){
+            case CAR:
+                if (dto.getValue().compareTo(MIN_CAR_VALUE) < 0 || dto.getDate().isBefore(MIN_ASSESS_DATE)){
+                    return -210;
+                }
+            case AIRPLANE:
+                if (dto.getValue().compareTo(MIN_PLANE_VALUE) < 0 || dto.getDate().isBefore(MIN_ASSESS_DATE)){
+                    return -220;
+                }
+        }
+        return 0;
     }
 
     private int approveCar(CollateralObject object) {

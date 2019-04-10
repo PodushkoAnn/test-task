@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import static com.mcb.creditfactory.external.CollateralType.CAR;
+
 @AllArgsConstructor
 public class CarAdapter implements CollateralObject {
     private CarDto car;
@@ -30,6 +32,6 @@ public class CarAdapter implements CollateralObject {
 
     @Override
     public CollateralType getType() {
-        return CollateralType.CAR;
+        return CAR;
     }
 }
