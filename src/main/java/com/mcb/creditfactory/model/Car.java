@@ -23,6 +23,8 @@ public class Car {
     @Column(name = "year_of_issue")
     private Short year;
 
-    @Column(name = "assessed_value")
-    private BigDecimal value;
+    @ManyToOne()
+    @JoinColumn(name = "assessed_value")
+    private Value value;
+
 }

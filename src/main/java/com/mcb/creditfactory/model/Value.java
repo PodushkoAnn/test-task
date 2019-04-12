@@ -32,4 +32,9 @@ public class Value {
 
     @Column (name = "assessment_date")
     private LocalDate date;
+
+    public Value(String value){
+        this.value = new BigDecimal(value);
+    }
+
 }

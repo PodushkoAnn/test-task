@@ -20,4 +20,8 @@ public class ValueDto {
     private Long externalId;
     private BigDecimal value;
     private LocalDate date;
+
+    public ValueDto(String value){
+        this.value = new BigDecimal(value);
+    }
 }

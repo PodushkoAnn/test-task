@@ -12,7 +12,10 @@ import com.mcb.creditfactory.service.value.ValueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
+
+import static com.mcb.creditfactory.external.CollateralType.CAR;
 
 // TODO: reimplement this
 @Service
@@ -31,16 +34,25 @@ public class CollateralService {
 
         if (object instanceof CarDto) {
             CarDto car = (CarDto) object;
+
             boolean approved = carService.approve(car);
             if (!approved) {
                 return null;
             }
+            Value value = car.getValue();
+            value.setDate(LocalDate.now());
+            value.setObjectType(CAR);
+            valueService.save(value);
+            Long id = (
+                    Optional.of(car)
+                    .map(carService::fromDto)
+                    .map(carService::save)
+                    .map(carService::getId)
+                    .orElse(null));
+            value.setExternalId(id);
+            valueService.save(value);
+            return id;
 
-            return Optional.of(car)
-                .map(carService::fromDto)
-                .map(carService::save)
-                .map(carService::getId)
-                .orElse(null);
         } else if(object instanceof AirplaneDto){
             AirplaneDto plane = (AirplaneDto) object;
             boolean approved = airplaneService.approve(plane);
