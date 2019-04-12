@@ -26,12 +26,3 @@ create table VALUE (
   assessment_date DATE,
 );
 
--- create table VALUE (
---   id IDENTITY primary key,
---   airplane_id INT,
---   car_id INT,
---   assessed_value DEC(20),
---   assessment_date DATE,
---   foreign key (airplane_id) references AIRPLANE (id),
---   foreign key (car_id) references CAR (id)
--- );

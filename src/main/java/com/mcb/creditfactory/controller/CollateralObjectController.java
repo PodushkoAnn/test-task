@@ -36,5 +36,4 @@ public class CollateralObjectController {
         return value != null ? ResponseEntity.ok(value) : ResponseEntity.badRequest().build();
     }
 
-    //добавить метод, позволяющий получить список стоимостей по id объекта
 }

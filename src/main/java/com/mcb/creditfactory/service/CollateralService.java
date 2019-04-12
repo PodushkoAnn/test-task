@@ -98,32 +98,4 @@ public class CollateralService {
         return false;
     }
 
-// оригинальный код
-//        if (!(object instanceof CarDto)) {
-//            throw new IllegalArgumentException();
-//        }
-//        CarDto car = (CarDto) object;
-//        boolean approved = carService.approve(car);
-//        if (!approved) {
-//            return null;
-//        }
-//
-//        return Optional.of(car)
-//                .map(carService::fromDto)
-//                .map(carService::save)
-//                .map(carService::getId)
-//                .orElse(null);
-        //оригинальный код
-//        if (!(object instanceof CarDto)) {
-//            throw new IllegalArgumentException();
-//        }
-//
-//        return Optional.of((CarDto) object)
-//                .map(carService::fromDto)
-//                .map(carService::getId)
-//                .flatMap(carService::load)
-//                .map(carService::toDTO)
-//                .orElse(null);
-//    }
-
 }
