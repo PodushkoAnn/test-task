@@ -12,7 +12,4 @@ public interface ValueService {
     ValueDto toDto(Value value);
     boolean approve(ValueDto dto);
 
-    List<Value> loadObjectList(Long externalId, CollateralType type);
-
-    Value findLastValue(Long externalId, CollateralType type);
 }

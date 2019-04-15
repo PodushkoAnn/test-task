@@ -38,10 +38,12 @@ public class ExternalApproveService {
                 if (dto.getValue().compareTo(MIN_CAR_VALUE) < 0 || dto.getDate().isBefore(MIN_ASSESS_DATE)){
                     return -210;
                 }
+                break;
             case AIRPLANE:
                 if (dto.getValue().compareTo(MIN_PLANE_VALUE) < 0 || dto.getDate().isBefore(MIN_ASSESS_DATE)){
                     return -220;
                 }
+                break;
         }
         return 0;
     }

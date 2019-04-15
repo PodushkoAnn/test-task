@@ -4,6 +4,7 @@ import com.mcb.creditfactory.external.CollateralType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -22,6 +23,7 @@ public class Value {
     Long id;
 
     @Column (name = "object_type")
+    @Enumerated(EnumType.STRING)
     private CollateralType objectType;
 
     @Column (name = "external_id")
@@ -30,6 +32,7 @@ public class Value {
     @Column (name = "assessed_value")
     private BigDecimal value;
 
+//    @CreationTimestamp
     @Column (name = "assessment_date")
     private LocalDate date;
 

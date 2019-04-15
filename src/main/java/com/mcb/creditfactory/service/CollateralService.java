@@ -12,9 +12,9 @@ import com.mcb.creditfactory.service.value.ValueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
+import static com.mcb.creditfactory.external.CollateralType.AIRPLANE;
 import static com.mcb.creditfactory.external.CollateralType.CAR;
 
 // TODO: reimplement this
@@ -40,17 +40,16 @@ public class CollateralService {
                 return null;
             }
             Value value = car.getValue();
-            value.setDate(LocalDate.now());
             value.setObjectType(CAR);
             valueService.save(value);
-            Long id = (
-                    Optional.of(car)
+            Long id = Optional.of(car)
                     .map(carService::fromDto)
                     .map(carService::save)
                     .map(carService::getId)
-                    .orElse(null));
+                    .orElse(null);
             value.setExternalId(id);
             valueService.save(value);
+
             return id;
 
         } else if(object instanceof AirplaneDto){
@@ -59,18 +58,22 @@ public class CollateralService {
             if (!approved) {
                 return null;
             }
-
-            return Optional.of(plane)
+            Value value = plane.getValue();
+            value.setObjectType(AIRPLANE);
+            valueService.save(value);
+            Long id = Optional.of(plane)
                     .map(airplaneService::fromDto)
                     .map(airplaneService::save)
                     .map(airplaneService::getID)
                     .orElse(null);
+            value.setExternalId(id);
+            valueService.save(value);
+            return id;
         } else {
             throw new IllegalArgumentException();
         }
     }
 
-    //переписать метод - он должен возвращать последнюю стоимость
     public Collateral getInfo(Collateral object) {
 
         if (object instanceof CarDto) {

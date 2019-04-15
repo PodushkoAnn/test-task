@@ -24,5 +24,6 @@ create table VALUE (
   external_id INT,
   assessed_value DEC(20),
   assessment_date DATE,
+
 );
 

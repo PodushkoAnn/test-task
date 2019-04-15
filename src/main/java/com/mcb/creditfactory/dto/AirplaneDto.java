@@ -1,6 +1,7 @@
 package com.mcb.creditfactory.dto;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.mcb.creditfactory.model.Value;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,6 @@ public class AirplaneDto implements Collateral{
     private Short year;
     private Integer fuelCapacity;
     private Integer seats;
-    private BigDecimal value;
+    private Value value;
 
 }

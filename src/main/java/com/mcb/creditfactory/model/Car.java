@@ -3,9 +3,10 @@ package com.mcb.creditfactory.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JoinFormula;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -23,8 +24,7 @@ public class Car {
     @Column(name = "year_of_issue")
     private Short year;
 
-    @ManyToOne()
-    @JoinColumn(name = "assessed_value")
+    @ManyToOne
+    @JoinFormula("(SELECT v.id FROM value v WHERE v.external_id = id and v.object_type = 'CAR' ORDER BY v.assessment_date DESC LIMIT 1)")
     private Value value;
-
 }

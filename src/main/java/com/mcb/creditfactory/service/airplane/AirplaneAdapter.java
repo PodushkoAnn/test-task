@@ -15,7 +15,7 @@ public class AirplaneAdapter implements CollateralObject {
 
     @Override
     public BigDecimal getValue() {
-        return airplaneDto.getValue();
+        return airplaneDto.getValue().getValue();
     }
 
     @Override
@@ -23,10 +23,9 @@ public class AirplaneAdapter implements CollateralObject {
         return airplaneDto.getYear();
     }
 
-    //здесь нужно поменять
     @Override
     public LocalDate getDate() {
-        return LocalDate.now();
+        return airplaneDto.getValue().getDate();
     }
 
     @Override

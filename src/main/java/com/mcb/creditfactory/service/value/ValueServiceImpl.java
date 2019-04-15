@@ -1,14 +1,11 @@
 package com.mcb.creditfactory.service.value;
 
 import com.mcb.creditfactory.dto.ValueDto;
-import com.mcb.creditfactory.external.CollateralType;
 import com.mcb.creditfactory.external.ExternalApproveService;
 import com.mcb.creditfactory.model.Value;
 import com.mcb.creditfactory.repository.ValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ValueServiceImpl implements ValueService {
@@ -48,16 +45,6 @@ public class ValueServiceImpl implements ValueService {
     @Override
     public boolean approve(ValueDto dto) {
         return approveService.approveValue(dto) == 0;
-    }
-
-    @Override
-    public List<Value> loadObjectList(Long id, CollateralType type) {
-        return valueRepository.findValuesByExternalIdAndObjectType(id, type);
-    }
-
-    @Override
-    public Value findLastValue(Long id, CollateralType type) {
-        return valueRepository.findLastValueByExternalIdAndObjectType(id, type);
     }
 
 }
