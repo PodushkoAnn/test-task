@@ -8,7 +8,6 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -32,9 +31,5 @@ public class Airplane {
 
     @ManyToOne
     @JoinFormula("(SELECT v.id FROM value v WHERE v.external_id = id and v.object_type = 'AIRPLANE' ORDER BY v.assessment_date DESC LIMIT 1)")
-//    @JoinColumnsOrFormulas({
-//            @JoinColumnOrFormula(formula = @JoinFormula(value = "(SELECT v.id FROM value v WHERE v.external_id = id ORDER BY v.assessment_date DESC LIMIT 1)")),
-//            @JoinColumnOrFormula(formula = @JoinFormula(value = "SELECT v.id FROM value v WHERE v.object_type = 'AIRPLANE'"))
-//    })
     private Value value;
 }

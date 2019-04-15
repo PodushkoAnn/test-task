@@ -34,19 +34,22 @@ public class CollateralService {
 
         if (object instanceof CarDto) {
             CarDto car = (CarDto) object;
-
-            boolean approved = carService.approve(car);
-            if (!approved) {
-                return null;
-            }
             Value value = car.getValue();
             value.setObjectType(CAR);
             valueService.save(value);
+
+            boolean approved = carService.approve(car);
+            if (!approved) {
+                valueService.delete(value);
+                return null;
+            }
+
             Long id = Optional.of(car)
                     .map(carService::fromDto)
                     .map(carService::save)
                     .map(carService::getId)
                     .orElse(null);
+
             value.setExternalId(id);
             valueService.save(value);
 
@@ -54,13 +57,15 @@ public class CollateralService {
 
         } else if(object instanceof AirplaneDto){
             AirplaneDto plane = (AirplaneDto) object;
-            boolean approved = airplaneService.approve(plane);
-            if (!approved) {
-                return null;
-            }
             Value value = plane.getValue();
             value.setObjectType(AIRPLANE);
             valueService.save(value);
+            boolean approved = airplaneService.approve(plane);
+            if (!approved) {
+                valueService.delete(value);
+                return null;
+            }
+
             Long id = Optional.of(plane)
                     .map(airplaneService::fromDto)
                     .map(airplaneService::save)

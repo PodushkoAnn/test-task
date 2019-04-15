@@ -32,12 +32,16 @@ public class Value {
     @Column (name = "assessed_value")
     private BigDecimal value;
 
-//    @CreationTimestamp
+    @CreationTimestamp
     @Column (name = "assessment_date")
     private LocalDate date;
 
     public Value(String value){
         this.value = new BigDecimal(value);
+    }
+
+    public Value(Long value){
+        this.value = new BigDecimal(value.toString());
     }
 
 }

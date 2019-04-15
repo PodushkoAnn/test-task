@@ -47,4 +47,9 @@ public class ValueServiceImpl implements ValueService {
         return approveService.approveValue(dto) == 0;
     }
 
+    @Override
+    public void delete(Value value) {
+        valueRepository.delete(value);
+    }
+
 }
